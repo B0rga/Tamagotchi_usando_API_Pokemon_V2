@@ -15,3 +15,4 @@ C:\C#\Projetos02\Projeto35\obj\Debug\net8.0\refint\Projeto35.dll
 C:\C#\Projetos02\Projeto35\obj\Debug\net8.0\Projeto35.pdb
 C:\C#\Projetos02\Projeto35\obj\Debug\net8.0\Projeto35.genruntimeconfig.cache
 C:\C#\Projetos02\Projeto35\obj\Debug\net8.0\ref\Projeto35.dll
+C:\C#\Projetos02\Projeto35\obj\Debug\net8.0\Projeto35.sourcelink.json

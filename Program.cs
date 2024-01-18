@@ -1,9 +1,8 @@
 ﻿
 using System.Text.Json;
 using Projeto35.Models;
+using Projeto35.View;
 using RestSharp;
-
-Console.Clear();
 
 var client = new RestClient("https://pokeapi.co/api/v2/pokemon");
 RestRequest request = new RestRequest("", Method.Get); 
@@ -35,26 +34,71 @@ for(int i=0; i<pokemonResultsAPI.results.Count; i++){
     });
 }
 
-menu.ExibirPokemons();
+// ==============================================================================================
 
-menu.EscolherPokemon();
-menu.MostrarDetalhesPokemon();
-menu.AdotarPokemon();
+MenuInterface menuInterface = new MenuInterface();
 
-menu.EscolherPokemon();
-menu.MostrarDetalhesPokemon();
-menu.AdotarPokemon();
+string nomeUsuario;
+string pokemonEscolhido;
+bool menuInicialAtivo = true;
+bool pokemonEstaNalista;
 
-menu.EscolherPokemon();
-menu.MostrarDetalhesPokemon();
-menu.AdotarPokemon();
+Console.Clear();
+Console.Write("Sejam bem-vindo(a) a nossa adoção de mascotes!\nPrimeiro, insira seu nome: ");
+nomeUsuario = Console.ReadLine();
 
-menu.EscolherPokemon();
-menu.MostrarDetalhesPokemon();
-menu.AdotarPokemon();
+while(menuInicialAtivo==true){
+    
+    pokemonEstaNalista = false;
+    bool menuAdocaoAtivo = true; // e menu de adoção deve sempre começar true para poder ser executada mais de uma vez
 
-menu.ExibirMeusPokemons();
+    menuInterface.MenuInicial(nomeUsuario);
+    switch(Console.ReadLine()){
+        case "1":
+            menu.ExibirPokemons();
+            Console.Write("\nQual pokémon você escolhe? ");
+            pokemonEscolhido = Console.ReadLine();
 
-menu.ExibirPokemons();
+            // verificação se o nome do pokemon existe:
+            foreach(var pokemon in menu.pokemonsDisponiveis){
+                if(pokemonEscolhido.Equals(pokemon.nome)){
+                    pokemonEstaNalista = true;
+                }
+            }
 
-menu.EscolherPokemon();
+            if(pokemonEstaNalista == true){
+                while(menuAdocaoAtivo == true){
+                    menuInterface.MenuAdocao(nomeUsuario, pokemonEscolhido);
+                    switch(Console.ReadLine()){
+                        case "1":
+                            menu.MostrarDetalhesPokemon(pokemonEscolhido);
+                            break;
+                        case "2":
+                            menu.AdotarPokemon(pokemonEscolhido);
+                            menuAdocaoAtivo = false;
+                            break;
+                        case "3":
+                            menuAdocaoAtivo = false;
+                            break;
+                        default:
+                            break;
+                    }   
+                }
+            }
+            else{
+                menuInterface.NomeNaoEncontrado();
+            }
+            break;
+        case "2":
+            menu.ExibirMeusPokemons();
+            break;
+        case "3":
+            Console.WriteLine($"\nSessão encerrada com êxito. Até a próxima {nomeUsuario}\n");
+            menuInicialAtivo = false;
+            break;
+        default:
+            Console.WriteLine("\nOpção inválida.\n");
+            Thread.Sleep(2000);
+            break;
+    }
+}

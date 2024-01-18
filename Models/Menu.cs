@@ -9,58 +9,37 @@ namespace Projeto35.Models{
         public List<PokemonDisponivel> pokemonsDisponiveis { get; set; }
         public List<MeuPokemon> meusPokemons { get; set; }
 
-        public string pokemonEscolhido { get; set; }
-
         public Menu(){
             pokemonsDisponiveis = new List<PokemonDisponivel>();
             meusPokemons = new List<MeuPokemon>();
         }
 
         public void ExibirPokemons(){
+            Console.Clear();
+            for(int i=0; i<pokemonsDisponiveis.Count; i++){
+                Console.WriteLine($"- {pokemonsDisponiveis[i].nome.ToUpper()}");
+            }
+        }
+
+        public void MostrarDetalhesPokemon(string pokemonEscolhido){
             Console.WriteLine(" ");
             for(int i=0; i<pokemonsDisponiveis.Count; i++){
-                Console.Write(pokemonsDisponiveis[i].nome);
-                Console.Write($" | {pokemonsDisponiveis[i].altura} | ");
-                Console.Write($"{pokemonsDisponiveis[i].peso} | ");
-                foreach(string habilidade in pokemonsDisponiveis[i].habilidades){
-                    Console.Write($"{habilidade} ");
-                }
-                Console.WriteLine("");
-            }
-        }
-
-        public void EscolherPokemon(){
-            Console.Write("Insira o nome de um pokémon: ");
-            string nomeEscolhido = Console.ReadLine();
-            bool nomeEstaNaLista = false;
-
-            for(int i=0; i<pokemonsDisponiveis.Count; i++){
-                if(pokemonsDisponiveis[i].nome.Equals(nomeEscolhido)){
-                    nomeEstaNaLista = true;
-                    pokemonEscolhido = nomeEscolhido;
-                }
-            }
-
-            if(nomeEstaNaLista == false){
-                Console.WriteLine("Pokémon não encontrado");
-            }
-        }
-
-        public void MostrarDetalhesPokemon(){
-            for(int i=0; i<pokemonsDisponiveis.Count; i++){
                 if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido)){
-                    Console.Write(pokemonsDisponiveis[i].nome);
-                    Console.Write($" | {pokemonsDisponiveis[i].altura} | ");
-                    Console.Write($"{pokemonsDisponiveis[i].peso} | ");
+                    Console.WriteLine($"Nome: {pokemonsDisponiveis[i].nome.ToUpper()}");
+                    Console.WriteLine($"Altura: {pokemonsDisponiveis[i].altura}");
+                    Console.WriteLine($"Peso: {pokemonsDisponiveis[i].peso}");
+                    Console.WriteLine("Habilidades: ");
                     foreach(string habilidade in pokemonsDisponiveis[i].habilidades){
-                        Console.Write($"{habilidade} ");
+                        Console.Write($"- {habilidade.ToUpper()}\n");
                     }
-                    Console.WriteLine("");
                 }
             }
+            Thread.Sleep(2000);
+            Console.Write("\nQualquer tecla para voltar: ");
+            Console.ReadKey();
         }
 
-        public void AdotarPokemon(){
+        public void AdotarPokemon(string pokemonEscolhido){
             for(int i=0; i<pokemonsDisponiveis.Count; i++){
                 if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido)){
                     meusPokemons.Add(new MeuPokemon{
@@ -72,20 +51,32 @@ namespace Projeto35.Models{
                     pokemonsDisponiveis.RemoveAt(i);
                 }
             }
-            Console.WriteLine("Pokémon adotado com sucesso!");
+            Console.WriteLine("\nPokémon adotado com sucesso!\n");
+            Thread.Sleep(2000);
+            Console.Write("Qualquer tecla para voltar: ");
+            Console.ReadKey();
         }
 
         public void ExibirMeusPokemons(){
-            Console.WriteLine("\nMeus pokémons:");
-            for(int i=0; i<meusPokemons.Count; i++){
-                Console.Write(meusPokemons[i].nome);
-                Console.Write($" | {meusPokemons[i].altura} | ");
-                Console.Write($"{meusPokemons[i].peso} | ");
-                foreach(string habilidade in meusPokemons[i].habilidades){
-                    Console.Write($"{habilidade} ");
+            Console.Clear();
+            if(meusPokemons.Any()){
+                Console.WriteLine("\nMeus pokémons:\n");
+                for(int i=0; i<meusPokemons.Count; i++){
+                    Console.Write(meusPokemons[i].nome.ToUpper());
+                    Console.Write($" | {meusPokemons[i].altura} | ");
+                    Console.Write($"{meusPokemons[i].peso} | ");
+                    foreach(string habilidade in meusPokemons[i].habilidades){
+                        Console.Write($"{habilidade.ToUpper()} ");
+                    }
+                    Console.WriteLine("");
                 }
-                Console.WriteLine("");
             }
+            else{
+                Console.WriteLine("Ainda não há pokémons por aqui...");
+            }
+            Thread.Sleep(2000);
+            Console.Write("\nQualquer tecla para voltar: ");
+            Console.ReadKey();
         }
     }
 }
