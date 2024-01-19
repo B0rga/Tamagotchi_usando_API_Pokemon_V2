@@ -2,14 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Projeto35.Service;
 
 namespace Projeto35.Models{
-    public class Menu{
-
+    public class ListaPokemons{
+        
         public List<PokemonDisponivel> pokemonsDisponiveis { get; set; }
         public List<MeuPokemon> meusPokemons { get; set; }
 
-        public Menu(){
+        public ListaPokemons(){
             pokemonsDisponiveis = new List<PokemonDisponivel>();
             meusPokemons = new List<MeuPokemon>();
         }
@@ -34,7 +35,7 @@ namespace Projeto35.Models{
                     }
                 }
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             Console.Write("\nQualquer tecla para voltar: ");
             Console.ReadKey();
         }
@@ -52,7 +53,7 @@ namespace Projeto35.Models{
                 }
             }
             Console.WriteLine("\nPokémon adotado com sucesso!\n");
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             Console.Write("Qualquer tecla para voltar: ");
             Console.ReadKey();
         }
@@ -62,7 +63,7 @@ namespace Projeto35.Models{
             if(meusPokemons.Any()){
                 Console.WriteLine("\nMeus pokémons:\n");
                 for(int i=0; i<meusPokemons.Count; i++){
-                    Console.Write(meusPokemons[i].nome.ToUpper());
+                    Console.Write($"- {meusPokemons[i].nome.ToUpper()}");
                     Console.Write($" | {meusPokemons[i].altura} | ");
                     Console.Write($"{meusPokemons[i].peso} | ");
                     foreach(string habilidade in meusPokemons[i].habilidades){
@@ -74,7 +75,7 @@ namespace Projeto35.Models{
             else{
                 Console.WriteLine("Ainda não há pokémons por aqui...");
             }
-            Thread.Sleep(2000);
+            Thread.Sleep(1000);
             Console.Write("\nQualquer tecla para voltar: ");
             Console.ReadKey();
         }
