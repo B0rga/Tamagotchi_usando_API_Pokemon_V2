@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Projeto35.Service;
 
 namespace Projeto35.Models{
+    // esta classe tem como objetivo criar métodos que trabalham com a interação do usuário com os pokemons para adoção
     public class ListaPokemons{
-        
         public List<PokemonDisponivel> pokemonsDisponiveis { get; set; }
-        public List<MeuPokemon> meusPokemons { get; set; }
+        private ListaMeusPokemons listaMeusPokemons { get; set; }
 
         public ListaPokemons(){
             pokemonsDisponiveis = new List<PokemonDisponivel>();
-            meusPokemons = new List<MeuPokemon>();
+            listaMeusPokemons = new ListaMeusPokemons();
         }
 
         public void ExibirPokemons(){
@@ -25,7 +25,7 @@ namespace Projeto35.Models{
         public void MostrarDetalhesPokemon(string pokemonEscolhido){
             Console.WriteLine(" ");
             for(int i=0; i<pokemonsDisponiveis.Count; i++){
-                if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido)){
+                if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido.ToLower())){
                     Console.WriteLine($"Nome: {pokemonsDisponiveis[i].nome.ToUpper()}");
                     Console.WriteLine($"Altura: {pokemonsDisponiveis[i].altura}");
                     Console.WriteLine($"Peso: {pokemonsDisponiveis[i].peso}");
@@ -40,13 +40,14 @@ namespace Projeto35.Models{
             Console.ReadKey();
         }
 
-        public void AdotarPokemon(string pokemonEscolhido){
+        public ListaMeusPokemons AdotarPokemon(string pokemonEscolhido){
             for(int i=0; i<pokemonsDisponiveis.Count; i++){
-                if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido)){
-                    meusPokemons.Add(new MeuPokemon{
+                if(pokemonsDisponiveis[i].nome.Equals(pokemonEscolhido.ToLower())){
+                    listaMeusPokemons.meusPokemons.Add(new MeuPokemon{
                         nome = pokemonsDisponiveis[i].nome,
                         altura = pokemonsDisponiveis[i].altura,
-                        peso = pokemonsDisponiveis[i].peso,
+                        pesoOriginal = pokemonsDisponiveis[i].peso,
+                        pesoAtual = pokemonsDisponiveis[i].peso,
                         habilidades = pokemonsDisponiveis[i].habilidades
                     });
                     pokemonsDisponiveis.RemoveAt(i);
@@ -56,28 +57,8 @@ namespace Projeto35.Models{
             Thread.Sleep(1000);
             Console.Write("Qualquer tecla para voltar: ");
             Console.ReadKey();
-        }
 
-        public void ExibirMeusPokemons(){
-            Console.Clear();
-            if(meusPokemons.Any()){
-                Console.WriteLine("\nMeus pokémons:\n");
-                for(int i=0; i<meusPokemons.Count; i++){
-                    Console.Write($"- {meusPokemons[i].nome.ToUpper()}");
-                    Console.Write($" | {meusPokemons[i].altura} | ");
-                    Console.Write($"{meusPokemons[i].peso} | ");
-                    foreach(string habilidade in meusPokemons[i].habilidades){
-                        Console.Write($"{habilidade.ToUpper()} ");
-                    }
-                    Console.WriteLine("");
-                }
-            }
-            else{
-                Console.WriteLine("Ainda não há pokémons por aqui...");
-            }
-            Thread.Sleep(1000);
-            Console.Write("\nQualquer tecla para voltar: ");
-            Console.ReadKey();
+            return listaMeusPokemons;
         }
     }
 }

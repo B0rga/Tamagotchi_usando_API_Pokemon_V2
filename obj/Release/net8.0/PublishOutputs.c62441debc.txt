@@ -1,0 +1,6 @@
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\Projeto35.exe
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\Projeto35.dll
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\Projeto35.deps.json
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\Projeto35.runtimeconfig.json
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\Projeto35.pdb
+C:\C#\Projetos02\Projeto35\bin\Release\net8.0\publish\RestSharp.dll

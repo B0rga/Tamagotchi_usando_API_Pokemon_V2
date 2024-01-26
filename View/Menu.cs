@@ -20,16 +20,29 @@ namespace Projeto35.Models{
             Console.Clear();
             Console.WriteLine($"========== MENU DE ADOÇÃO ==========\n");
             Console.WriteLine($"{nomeUsuario}, você deseja:\n");
-            Console.WriteLine($"1 - Saber mais sobre {pokemonEscolhido}");
-            Console.WriteLine($"2 - Adotar {pokemonEscolhido}");
+            Console.WriteLine($"1 - Saber mais sobre {pokemonEscolhido.ToLower()}");
+            Console.WriteLine($"2 - Adotar {pokemonEscolhido.ToLower()}");
             Console.WriteLine($"3 - Voltar");
             Console.Write("\nOpção: ");
         }
 
         public void NomeNaoEncontrado(){
             Console.WriteLine("\nPokémon não encontrado.\n");
+            Thread.Sleep(1000);
             Console.Write("Qualquer tecla para voltar: ");
             Console.ReadKey();
+        }
+
+        public void MeuPokemon(string nomeUsuario, string pokemonEscolhido){
+            Console.Clear();
+            Console.WriteLine($"========== {pokemonEscolhido.ToUpper()} ==========\n");
+            Console.WriteLine($"{nomeUsuario}, você deseja:\n");
+            Console.WriteLine($"1 - Saber como {pokemonEscolhido.ToLower()} está");
+            Console.WriteLine($"2 - Alimentar {pokemonEscolhido.ToLower()}");
+            Console.WriteLine($"3 - Brincar com {pokemonEscolhido.ToLower()}");
+            Console.WriteLine($"4 - Treinar {pokemonEscolhido.ToLower()}");
+            Console.WriteLine($"5 - Voltar");
+            Console.Write("\nOpção: ");
         }
     }
 }
