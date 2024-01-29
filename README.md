@@ -1,0 +1,2 @@
+# Tamagotchi com Pokémons
+Neste projeto estou utilizando a biblioteca RestSharp para coletar dados da API PokéAPI. A aplicação irá conter nomes e detalhes de Pokémons variados, que poderão ser adotados pelo usuário e então virarem seus mascotes estilo Tamagotchi. Ou seja, assim como no antigo brinquedo, o usuário deverá cuidar de seu bichinho para não perdê-lo tragicamente. É preciso alimentar, brincar, treinar e dentre outras funções para manter seu pokémon alegre e saudável!
