@@ -47,7 +47,7 @@ namespace Projeto35.Models{
                 if(meusPokemons[i].nome.Equals(pokemonEscolhido.ToLower())){
 
                     if(meusPokemons[i].pesoAtual<meusPokemons[i].pesoOriginal/2){
-                        Console.WriteLine($"\nBulbasaur perdeu muito peso e por isso virou estrelinha ( X ͜ʖ X )");
+                        Console.WriteLine($"\n{meusPokemons[i].nome} perdeu muito peso e por isso virou estrelinha ( X ͜ʖ X )");
                         meusPokemons.RemoveAt(i);
 
                     }else{
@@ -81,16 +81,16 @@ namespace Projeto35.Models{
 
                         // Alertas do Pokemon =================================================
                         if(meusPokemons[i].pesoOriginal > meusPokemons[i].pesoAtual){
-                            Console.WriteLine($"{meusPokemons[i].nome} está com fome! (ಠ╭╮ಠ)");
+                            Console.WriteLine($"{meusPokemons[i].nome} está com fome! ( '~')");
                         }
                         if(meusPokemons[i].tristeza>=10){
-                            Console.WriteLine($"{meusPokemons[i].nome} está triste! (ಥ ﹏ಥ)");
+                            Console.WriteLine($"{meusPokemons[i].nome} está triste! ( T_T)");
                         }
                         if(meusPokemons[i].fraqueza>=10){
                             Console.WriteLine($"{meusPokemons[i].nome} está fraco! (; -_-)");
                         }
                         if(meusPokemons[i].pesoAtual >= meusPokemons[i].pesoOriginal && meusPokemons[i].tristeza<10 && meusPokemons[i].fraqueza<10){
-                            Console.WriteLine($"Está tudo ok com {meusPokemons[i].nome}! (👍 ͡° ͜ʖ ͡°)");
+                            Console.WriteLine($"Está tudo ok com {meusPokemons[i].nome}! ( ^-^)");
                         }
                     }
                 }
@@ -108,21 +108,28 @@ namespace Projeto35.Models{
 
             for(int i=0; i<meusPokemons.Count; i++){
                 if(meusPokemons[i].nome.Equals(pokemonEscolhido)){
-                    pontosPeso = randNum.Next(5,12);
+                    pontosPeso = randNum.Next(5,14);
                     pontosAlegria = randNum.Next(1,3);
                     meusPokemons[i].pesoAtual+=pontosPeso;
                     meusPokemons[i].tristeza-=pontosAlegria;
 
-                    Console.WriteLine("\n༼ つ ˘ڡ˘ ༽つ🍔");
-                    Console.Write($"\nAlimentando {meusPokemons[i].nome}");
-                    for(int j=0; j<3; j++){
-                        Console.Write(".");
-                        Thread.Sleep(1000);
+                    for(int j=1; j<5; j++){
+                        if(j%2==0){
+                            Console.WriteLine($"\nAlimentando {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( ^-^)");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }else{
+                            Console.WriteLine($"\nAlimentando {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( ^O^)*");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
                     }
 
                     Console.Clear();
-                    Console.WriteLine("\n༼ 👍 ͡° ͜ʖ ͡° ༽");
                     Console.WriteLine($"\n{pokemonEscolhido} foi alimentado! ");
+                    Console.WriteLine("\n( 'w')");
                     Console.WriteLine($"\nPeso +{pontosPeso}");
                     Console.WriteLine($"Alegria +{pontosAlegria}");
                     
@@ -146,16 +153,23 @@ namespace Projeto35.Models{
                     meusPokemons[i].tristeza-=pontosAlegria;
                     meusPokemons[i].fome+=pontosFome;
 
-                    Console.WriteLine("\n༼ つ ◕ ‿ ◕ ༽つ🕹️");
-                    Console.Write($"\nBrincando com {meusPokemons[i].nome}");
-                    for(int j=0; j<3; j++){
-                        Console.Write(".");
-                        Thread.Sleep(1000);
+                    for(int j=1; j<5; j++){
+                        if(j%2==0){
+                            Console.WriteLine($"\nBrincando com {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( ^v^)");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }else{
+                            Console.WriteLine($"\nBrincando com {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( 'V')");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
                     }
 
                     Console.Clear();
-                    Console.WriteLine("\n༼ 👍｡ ͡° ͜ʖ ͡°｡ ༽");
                     Console.WriteLine($"\n{pokemonEscolhido} gostou de ter brincado! ");
+                    Console.WriteLine("\n( 'U')/");
                     Console.WriteLine($"\nAlegria +{pontosAlegria}");
                     Console.WriteLine($"Fome +{pontosFome}");
                     
@@ -182,16 +196,23 @@ namespace Projeto35.Models{
                     meusPokemons[i].tristeza-=pontosAlegria;
                     meusPokemons[i].fome+=pontosFome;
 
-                    Console.WriteLine("\n༼ ᕙ ‶⇀`‸´↼ ༽ᕗ");
-                    Console.Write($"\nTreinando com {meusPokemons[i].nome}");
-                    for(int j=0; j<3; j++){
-                        Console.Write(".");
-                        Thread.Sleep(1000);
+                    for(int j=1; j<5; j++){
+                        if(j%2==0){
+                            Console.WriteLine($"\nTreinando {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( `n´)_");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }else{
+                            Console.WriteLine($"\nTreinando {meusPokemons[i].nome}...");
+                            Console.WriteLine("\n( `o´)_/");
+                            Thread.Sleep(1000);
+                            Console.Clear();
+                        }
                     }
 
                     Console.Clear();
-                    Console.WriteLine("\n༼ 💪 ͡▀ ͜͞ʖ▀ ༽=/̵͇̿̿/’̿’̿ ̿ ̿̿ ̿̿ ̿̿");
                     Console.WriteLine($"\n{pokemonEscolhido} está ficando mais forte! ");
+                    Console.WriteLine("\n<( `V´)>");
                     Console.WriteLine($"\nForça +{pontosForca}");
                     Console.WriteLine($"Alegria +{pontosAlegria}");
                     Console.WriteLine($"Fome +{pontosFome}");
