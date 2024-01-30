@@ -26,8 +26,8 @@ namespace Projeto35.Models{
             Console.Write("\nOpção: ");
         }
 
-        public void NomeNaoEncontrado(){
-            Console.WriteLine("\nPokémon não encontrado.\n");
+        public void NomeNaoEncontrado(string pokemonEscolhido){
+            Console.WriteLine($"\nPokémon '{pokemonEscolhido}' não encontrado na lista.\n");
             Thread.Sleep(1000);
             Console.Write("Qualquer tecla para voltar: ");
             Console.ReadKey();

@@ -9,11 +9,15 @@ using Projeto35.Service;
 namespace Projeto35.Controller{
     public class PokemonController{
         
+        // a classe Controller é responsável por concentrar todas as outras classes e funcionalidades
+        // em um só lugar. Estou instanciando as classes necessárias para obter os dados da API,
+        // adotar pokémons e também desempenhar o papel de Tamagotchi.
         private Menu menu { get; set; }
         private PokemonAPIService pokemonAPIService { get; set; }
         private ListaPokemons listaPokemons { get; set; }
         private ListaMeusPokemons listaMeusPokemons { get; set; }
         
+        // instanciando classes / criando novos objetos
         public PokemonController(){
             menu = new Menu();
             pokemonAPIService = new PokemonAPIService();
@@ -26,29 +30,29 @@ namespace Projeto35.Controller{
         public void Jogar(){
 
             string nomeUsuario;
-            string pokemonEscolhido;
-            bool menuInicialAtivo = true;
-            bool menuAdocaoAtivo;
-            bool menuMeuPokemonAtivo;
-            bool pokemonEstaNalista;
-            bool existemPokemonsAdotados;
+            string pokemonEscolhido; // variável que representará o nome de um pokémon que o usuário deverá escolher
+            bool menuInicialAtivo = true; // variável booleana responsável por manter o menu principal ativo
+            bool menuAdocaoAtivo; // variável responsável por manter o menu de adoção ativo
+            bool menuMeuPokemonAtivo; // variável responsável por manter o menu do Tamagotchi ativo
+            bool pokemonEstaNalista; // variável que verifica se o nome do pokemonEscolhido se encontra em alguma lista (seja na lista de pokemonsDisponiveis ou meusPokemons)
+            bool existemPokemonsAdotados; // variável que verifica se a lista de meusPokemons está ou não vazia
 
             Console.Clear();
             Console.Write("Sejam bem-vindo(a) a nossa adoção de mascotes!\nPrimeiro, insira seu nome: ");
             nomeUsuario = Console.ReadLine();
-            while(nomeUsuario == string.Empty){
+            while(nomeUsuario == string.Empty){ // impede com que o usuário deixe seu nome em branco
                 Console.Clear();
                 Console.WriteLine("O campo do nome deve ser preenchido!");
                 Console.Write("Insira seu nome: ");
                 nomeUsuario = Console.ReadLine();
             }
 
-            while(menuInicialAtivo==true){
+            while(menuInicialAtivo==true){ // menu inicial se encontra ativo enquanto for true
                 
-                pokemonEstaNalista = false;
-                menuAdocaoAtivo = true; // e menu de adoção deve sempre começar true para poder ser executada mais de uma vez
-                menuMeuPokemonAtivo = true;
-                existemPokemonsAdotados = false;
+                pokemonEstaNalista = false; // por default, pokemonEstaNalista deve começar false
+                menuAdocaoAtivo = true; // o menu de adoção deve sempre começar true para poder ser executado mais de uma vez
+                menuMeuPokemonAtivo = true; // o menu de Tamagotchi deve sempre começar true para poder ser executado mais de uma vez
+                existemPokemonsAdotados = false; // por default, existemPokemonsAdotados deve começar false
 
                 menu.MenuInicial(nomeUsuario);
                 switch(Console.ReadLine()){
@@ -64,18 +68,21 @@ namespace Projeto35.Controller{
                             }
                         }
 
-                        if(pokemonEstaNalista == true){
+                        if(pokemonEstaNalista == true){ // caso for true; o processo de adoção poderá ser continuado
                             while(menuAdocaoAtivo == true){
-                                menu.MenuAdocao(nomeUsuario, pokemonEscolhido);
+                                menu.MenuAdocao(nomeUsuario, pokemonEscolhido); // exibição do menu de adoção
                                 switch(Console.ReadLine()){
                                     case "1":
+                                        // mostrar detalhes do pokemonEscolhido
                                         listaPokemons.MostrarDetalhesPokemon(pokemonEscolhido);
                                         break;
                                     case "2":
+                                        // adotar pokemonEscolhido
                                         listaMeusPokemons = listaPokemons.AdotarPokemon(pokemonEscolhido); // objeto "listaMeusPokemons" está recebendo o pokémon escolhido através do método AdotarPokemon
-                                        menuAdocaoAtivo = false;
+                                        menuAdocaoAtivo = false; // menu de adoção se encerra automaticamente
                                         break;
                                     case "3":
+                                        // saindo do menu de adoção
                                         menuAdocaoAtivo = false;
                                         break;
                                     default:
@@ -86,17 +93,18 @@ namespace Projeto35.Controller{
                             }
                         }
                         else{
-                            menu.NomeNaoEncontrado();
+                            // método que notifica o usuário de que o nome do pokémon inserido não está na lista
+                            menu.NomeNaoEncontrado(pokemonEscolhido);
                         }
                         break;
                     case "2":
                         // no processo abaixo eu uso uma variável to tipo bool para verificar se há um pokémon adotado, antes de realizar qualquer outra ação
                         existemPokemonsAdotados = listaMeusPokemons.ExibirMeusPokemons();
-                        if(existemPokemonsAdotados == true){
+                        if(existemPokemonsAdotados == true){ // se for true, a lista de pokémons do usuário será exibida
                             Console.Write("\nInsira o nome de um pokémon (ou qualquer valor para sair): ");
                             pokemonEscolhido = Console.ReadLine();
 
-                            // verificação se o nome do pokemon existe:
+                            // verificação se o nome do pokemon inserido existe:
                             foreach(var pokemon in listaMeusPokemons.meusPokemons){
                                 if(pokemonEscolhido.ToUpper().Equals(pokemon.nome.ToUpper())){
                                     pokemonEstaNalista = true;
@@ -105,21 +113,26 @@ namespace Projeto35.Controller{
 
                             if(pokemonEstaNalista == true){
                                 while(menuMeuPokemonAtivo == true){
-                                    menu.MeuPokemon(nomeUsuario, pokemonEscolhido);
+                                    menu.MeuPokemon(nomeUsuario, pokemonEscolhido); // exibição do menu de Tamacotchi
                                     switch(Console.ReadLine()){
                                         case "1":
+                                            // mostrar detalhes do pokémon escolhido
                                             listaMeusPokemons.MostrarDetalhesMeuPokemon(pokemonEscolhido);
                                             break;
                                         case "2":
+                                            // alimentar do pokémon escolhido
                                             listaMeusPokemons.AlimentarMeuPokemon(pokemonEscolhido);
                                             break;
                                         case "3":
+                                            // brincar com pokémon escolhido
                                             listaMeusPokemons.BrincarComMeuPokemon(pokemonEscolhido);
                                             break;
                                         case "4":
+                                            // treinar pokémon escolhido
                                             listaMeusPokemons.TreinarMeuPokemon(pokemonEscolhido);
                                             break;
-                                        case "5":
+                                        case "5": 
+                                            // saindo do menu de Tamagotchi
                                             menuMeuPokemonAtivo = false;
                                             break;
                                         default:

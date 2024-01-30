@@ -42,7 +42,8 @@ namespace Projeto35.Service{
                     
                     // o loop se encerra ao criarmos um novo objeto de PokemonDisponivel, 
                     // que recebe os dados das classe PokemonResulstAPI (nome) e da classe
-                    // Propriedades (altura, peso, habilidades). 
+                    // Propriedades (altura, peso, habilidades). Todos os objetos se encontram 
+                    // na lista "pokemonsDisponiveis", da classe "ListaPokemons"
                     listaPokemons.pokemonsDisponiveis.Add(new PokemonDisponivel{
                         nome = pokemonResultsAPI.results[i].name,
                         altura = propriedades.height,
